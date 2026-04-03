@@ -1,0 +1,46 @@
+{
+    "title": "Roundabout Cities",
+    "description": "Top 10 cities sorted by the most roundabouts.",
+    "items": [
+        {
+            "name": "Carmel IN",
+            "order": 1
+        },
+        {
+            "name": "Colorado Springs CO",
+            "order": 2
+        },
+        {
+            "name": "Columia MO",
+            "order": 3
+        },
+        {
+            "name": "Loveland CO",
+            "order": 4
+        },
+        {
+            "name": "Austin TX",
+            "order": 5
+        },
+        {
+            "name": "Frisco TX",
+            "order": 6
+        },
+        {
+            "name": "Charlotte NC",
+            "order": 7
+        },
+        {
+            "name": "Lincoln NE",
+            "order": 8
+        },
+        {
+            "name": "Bend OR",
+            "order": 9
+        },
+        {
+            "name": "Durham NC",
+            "order": 10
+        }
+    ]
+}
