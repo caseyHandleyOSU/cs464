@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs/promises"
 import { DataEntry } from "@/types/data";
 
-const DATA_DIRECTORY = path.join(process.cwd(), "public", "data");
+const DATA_DIRECTORY = path.join(process.cwd(), "data");
 
 export async function GET(request: Request) {
   const items = await fs.readdir(DATA_DIRECTORY, { withFileTypes: true })
