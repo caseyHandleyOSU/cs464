@@ -60,7 +60,7 @@ export default function Home() {
             key={item.name}
             value={item}
             as="div"
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', 'cursor': 'move' }}
           >
             <Card variant="outlined">
               <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2, py: '12px !important' }}>
