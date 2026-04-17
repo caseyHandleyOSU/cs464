@@ -64,7 +64,7 @@ export default function Home() {
           >
             <Card variant="outlined">
               <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2, py: '12px !important' }}>
-                <DragHandleIcon color="action" />
+                <DragHandleIcon color="action" sx={{ cursor: 'grab' }} />
                 <Typography variant="body1">{item.name}</Typography>
               </CardContent>
             </Card>
