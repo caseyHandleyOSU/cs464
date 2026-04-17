@@ -8,10 +8,10 @@ export interface DatasetDatabaseItem {
     item_order: number
 }
 
-export interface Dataset {
+export interface Dataset<T = DatasetItem> {
     id: number
     dataset_slug?: string
     title: string
     description: string | null
-    items: DatasetItem[] | DatasetDatabaseItem[]
+    items: T[]
 }
