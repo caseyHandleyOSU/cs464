@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import {
   Box, Typography, Card, CardContent,
-  Select, MenuItem, FormControl, InputLabel
+  Select, MenuItem, FormControl, InputLabel,
+  Button, Alert
 } from '@mui/material';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import { Reorder } from 'motion/react';
@@ -21,11 +22,39 @@ export default function Home() {
 
   const [shuffledItems, setShuffledItems] = useState<DatasetItem[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [feedback, setFeedback] = useState<{
+    severity: 'success' | 'info',
+    message: string
+  } | null>(null);
 
   useEffect(() => {
     const shuffled = [...items].sort(() => Math.random() - 0.5);
     setShuffledItems(shuffled);
+    setFeedback(null);
   }, [items]);
+
+  const handleCheckOrder = () => {
+    const correctCount = shuffledItems.reduce((count, item, index) => {
+      return item.order === items[index].order ? count + 1 : count;
+    }, 0);
+
+    if (correctCount === items.length) {
+      setFeedback({
+        severity: 'success',
+        message: 'Correct! You solved the puzzle.'
+      });
+    } else {
+      setFeedback({
+        severity: 'info',
+        message: `${correctCount} of ${items.length} items are in the correct position.`
+      });
+    }
+  };
+
+  const handleReorder = (newOrder: DatasetItem[]) => {
+    setShuffledItems(newOrder);
+    setFeedback(null);
+  };
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, px: 2 }}>
@@ -44,16 +73,29 @@ export default function Home() {
         </Select>
       </FormControl>
 
+      <Button variant="contained" onClick={handleCheckOrder} sx={{ mb: 2 }}>
+        Check Order
+      </Button>
+
+      <Box sx={{ minHeight: 48, mb: 3 }}>
+        {feedback && (
+          <Alert severity={feedback.severity}>
+            {feedback.message}
+          </Alert>
+        )}
+      </Box>
+
       {/* Title & description from the JSON */}
       <Typography variant="h4" gutterBottom>{title}</Typography>
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>        {description}
+      <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+        {description}
       </Typography>
 
       {/* Item cards */}
       <Reorder.Group
         as="div"
         values={shuffledItems}
-        onReorder={setShuffledItems}
+        onReorder={handleReorder}
         style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
       >
         {shuffledItems.map((item) => (
