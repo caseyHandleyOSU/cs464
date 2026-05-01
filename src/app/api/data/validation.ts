@@ -1,5 +1,5 @@
-import { NextRequest } from "next/server"
 import * as z from "zod"
+import { NextRequest } from "next/server"
 
 const MIN_ITEMS = 2
 // The expected structure of the request body & validation rules
