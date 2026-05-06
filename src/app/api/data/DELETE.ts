@@ -16,7 +16,7 @@ export async function DELETE(request: NextRequest) {
     .delete()
 
   if (id) {
-    query.eq("id", id)
+    query.eq("id", Number(id))
   } else if (slug) {
     query.eq("dataset_slug", slug)
   }
@@ -25,10 +25,10 @@ export async function DELETE(request: NextRequest) {
 
   if (result.error) {
     if(result.error.code === "PGRST116") { // no rows deleted, likely because dataset with given id/slug doesn't exist
-      return new Response("Dataset not found", { status: 404 })
+      return Response.json({ error: "Dataset not found" }, { status: 404 })
     }
-    return new Response(result.error.message, { status: 500 })
+    return Response.json({ error: result.error.message }, { status: 500 })
   }
 
-  return new Response("Dataset deleted successfully", { status: 200 })
+  return Response.json({ message: "Dataset deleted successfully" }, { status: 200 })
 }
