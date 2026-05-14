@@ -17,7 +17,7 @@ export async function PATCH(
   try {
     const { searchParams } = new URL(request.url)
     const slug = searchParams.get('slug')
-    const supabase = getSupabaseClient();
+    const supabase = await getSupabaseClient();
     
     const PartialData = Data.partial();
     const body = PartialData.parse(await request.json());

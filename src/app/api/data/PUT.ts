@@ -8,7 +8,7 @@ export async function PUT(
   try {
     const { searchParams } = new URL(request.url)
     const slug = searchParams.get('slug')
-    const supabase = getSupabaseClient();
+    const supabase = await getSupabaseClient();
     const body = await request.json();
     const orderSet = new Set(body.items.map(i => i.order));
     if (orderSet.size !== body.items.length) {

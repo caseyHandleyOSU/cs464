@@ -4,7 +4,7 @@ import { Database } from "@/types/supabase"
 
 let supabaseClient: ReturnType<typeof createClient<Database>> | null = null
 
-export function getSupabaseClient() {
+export async function getSupabaseClient() {
   return createServerClient()
 }
 

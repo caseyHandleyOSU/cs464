@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { createServerClient } from "@/lib/supabase/createServerClient"
+import { getSupabaseClient } from "@/lib/supabase"
 import { NextRequest } from "next/server";
 
 const MIN_ITEMS = 2
@@ -22,7 +22,7 @@ export const Data = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = Data.parse(await request.json())
-    const supabase = await createServerClient() //getSupabaseClient()
+    const supabase = await getSupabaseClient()
 
     // Validate the order values are unique within the items array
     const orderSet = new Set<number>(body.items.map(item => item.order))

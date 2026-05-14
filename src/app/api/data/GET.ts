@@ -6,7 +6,7 @@ export async function GET(request: Request) {
     const name = searchParams.get('name')
 
     try {
-        const supabase = getSupabaseClient()
+        const supabase = await getSupabaseClient()
 
         // query param containing name -> return specified dataset
         if (name) {
