@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { getSupabaseClient } from "@/lib/supabase";
 import { NextRequest } from "next/server";
+import { Data } from "./POST"
 
 export async function PUT(
   request: NextRequest,

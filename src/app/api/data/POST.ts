@@ -1,10 +1,10 @@
 import * as z from "zod";
-import { getSupabaseClient } from "@/lib/supabase";
+import { createServerClient } from "@/lib/supabase/createServerClient"
 import { NextRequest } from "next/server";
 
 const MIN_ITEMS = 2
 // The expected structure of the request body & validation rules
-const Data = z.object({
+export const Data = z.object({
     slug: z.string("Missing slug")
       .min(3, "Slug must be at least 3 characters long")
       .regex(/^[a-z0-9\-]*$/, "Slug must be lowercase and can only contain letters, numbers, and hyphens")
@@ -22,14 +22,15 @@ const Data = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = Data.parse(await request.json())
-    const supabase = getSupabaseClient()
+    const supabase = await createServerClient() //getSupabaseClient()
 
     // Validate the order values are unique within the items array
     const orderSet = new Set<number>(body.items.map(item => item.order))
     if(orderSet.size !== body.items.length) {
       return Response.json({ error: "Item order values must be unique" }, { status: 400 })
     }
-
+    const user = (await supabase.auth.getUser()).data?.user
+    if(!user) return Response.json({ error: "Unauthorized" }, { status: 401 })
     // Create the dataset entry
     const { data, error } = await supabase
       .from('datasets')
@@ -38,13 +39,18 @@ export async function POST(request: NextRequest) {
         title: body.title,
         description: body.description,
         updated_at: new Date().toISOString(),
+        owner_id: user?.id || null
       }])
       .select('id')
 
     if (error) {
       if(error.code === '23505') { // unique violation
         return Response.json({ error: 'A dataset with this slug already exists' }, { status: 409 })
+      } else if (error.code === '42501') { // RLS violation
+        return Response.json({ error: 'Access Denied' }, { status: 403 })
       }
+      
+      console.error('Error inserting dataset:', error, 'User:', user?.id)
       return Response.json({ error: 'Failed to create dataset' }, { status: 500 })
     }
 
