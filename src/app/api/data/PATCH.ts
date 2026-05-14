@@ -17,6 +17,10 @@ export async function PATCH(
   try {
     const { searchParams } = new URL(request.url)
     const slug = searchParams.get('slug')
+    if (slug == null){
+      return Response.json({ error: "Missing required query parameter: slug" }, { status: 400 })
+    }
+
     const supabase = await getSupabaseClient();
     
     const PartialData = Data.partial();

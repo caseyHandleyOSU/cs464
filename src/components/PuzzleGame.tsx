@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button } from '@mui/material';
+import Link from 'next/link';
+import { Button, Box } from '@mui/material';
 import { Dataset, DatasetItem } from '@/types/data';
 import FeedbackAlert from '@/components/FeedbackAlert';
 import DatasetHeader from '@/components/DatasetHeader';
 import DraggableDatasetItems from '@/components/DraggableDatasetItems';
+
 
 type PuzzleGameProps = {
   dataset: Dataset | null;
@@ -34,6 +36,14 @@ export default function PuzzleGame({ dataset }: PuzzleGameProps) {
     }
   }, [dataset]);
 
+  const handleShuffleData = () => {
+    if (dataset) {
+      const shuffled = [...dataset.items].sort(() => Math.random() - 0.5);
+      setShuffledItems(shuffled);
+      setFeedback(null);
+    }
+  };
+
   const handleCheckOrder = () => {
     if (dataset) {
       const correctCount = shuffledItems.reduce((count, item, index) => {
@@ -61,9 +71,17 @@ export default function PuzzleGame({ dataset }: PuzzleGameProps) {
 
   return (
     <>
-      <Button variant="contained" onClick={handleCheckOrder} sx={{ mb: 2 }}>
-        Check Order
-      </Button>
+      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+        <Button variant="contained" onClick={handleCheckOrder}>
+          Check Order
+        </Button>
+        <Button variant="contained" onClick={handleShuffleData}>
+          Shuffle
+        </Button>
+        <Button variant="contained" component={Link} href="/add">
+          Add New Dataset
+        </Button>
+      </Box>
 
       <FeedbackAlert feedback={feedback} />
       <DatasetHeader dataset={dataset} />
