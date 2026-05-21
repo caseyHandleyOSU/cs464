@@ -11,6 +11,7 @@
     "sb": "supabase",
     "db:start": "supabase start",
     "db:stop": "supabase stop",
+    "db:restart": "supabase stop && supabase start",
     "db:status": "supabase status",
     "db:seed:do": "tsx scripts/seed-database.ts",
     "db:seed": "tsx scripts/dev-local.ts db:seed:do",
