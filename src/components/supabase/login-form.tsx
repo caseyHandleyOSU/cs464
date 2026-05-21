@@ -76,7 +76,7 @@ export function LoginForm({
               {isLoading ? "Logging in..." : "Login"}
             </Button>
             <Box sx={{ typography: "body2", textAlign: "center", color: "text.secondary" }}>
-              Don&apos;t have an account? <Link href="/auth/sign-up">Sign up</Link>
+              Don&apos;t have an account? <Link href="/signup">Sign up</Link>
             </Box>
           </Stack>
         </CardContent>

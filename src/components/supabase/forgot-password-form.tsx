@@ -71,7 +71,7 @@ export function ForgotPasswordForm({
                 {isLoading ? "Sending..." : "Send reset email"}
               </Button>
               <Box sx={{ typography: "body2", textAlign: "center", color: "text.secondary" }}>
-                Already have an account? <Link href="/auth/login">Login</Link>
+                Already have an account? <Link href="/login">Login</Link>
               </Box>
             </Stack>
           </CardContent>

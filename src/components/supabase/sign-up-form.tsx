@@ -88,7 +88,7 @@ export function SignUpForm({
               {isLoading ? "Creating an account..." : "Sign up"}
             </Button>
             <Box sx={{ typography: "body2", textAlign: "center", color: "text.secondary" }}>
-              Already have an account? <Link href="/auth/login">Login</Link>
+              Already have an account? <Link href="/login">Login</Link>
             </Box>
           </Stack>
         </CardContent>
