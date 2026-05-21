@@ -1,5 +1,5 @@
-import { Box, Container } from "@mui/material";
-import { UpdatePasswordForm } from "@/components/supabase/update-password-form";
+import { UpdatePasswordForm } from "@/components/supabase/update-password-form"
+import { Box, Container } from "@mui/material"
 
 export default function Page() {
   return (

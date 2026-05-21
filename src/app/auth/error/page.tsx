@@ -1,5 +1,5 @@
-import { Box, Card, CardContent, CardHeader, Container, Typography } from "@mui/material";
-import { Suspense } from "react";
+import { Box, Card, CardContent, CardHeader, Container, Typography } from "@mui/material"
+import { Suspense } from "react"
 
 async function ErrorContent({
   searchParams,

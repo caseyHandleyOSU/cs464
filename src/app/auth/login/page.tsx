@@ -1,5 +1,5 @@
-import { Box, Container } from "@mui/material";
-import { LoginForm } from "@/components/supabase/login-form";
+import { Box, Container } from "@mui/material"
+import { LoginForm } from "@/components/supabase/login-form"
 
 export default function Page() {
   return (

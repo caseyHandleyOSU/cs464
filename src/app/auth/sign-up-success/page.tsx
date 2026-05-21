@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardHeader, Container, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardHeader, Container, Typography } from "@mui/material"
 
 export default function Page() {
   return (
